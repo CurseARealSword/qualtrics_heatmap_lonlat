@@ -6,8 +6,8 @@ import os
 
 # config
 TIF_PATH = "sources/Kombikarte_georeferenziert.tif"  
-CSV_PATH = "qualtrics_results.csv"
-OUTPUT_PATH = "processed_results.csv" 
+CSV_PATH = "sources/qualtrics_results.csv"
+OUTPUT_PATH = "output/processed_results.csv"
 
 # distorition correction
 TIF_WIDTH = 2604
@@ -100,7 +100,7 @@ def process_survey_data():
     # step 5: remove "unnamed" ghost columns
     df_clean = df_clean.loc[:, ~df_clean.columns.str.contains('^Unnamed')]
 
-    # step : save results
+    # step 6: save results
     print(f"saving data to {OUTPUT_PATH}...")
     df_clean.to_csv(OUTPUT_PATH, index=False)
     print("finished!")
