@@ -10,7 +10,7 @@ pip install -r requirements.txt
 1. inputs:
 * `qualtrics_results.csv`: raw survey export (header row 1).
 * `sources/kombikarte_georeferenziert.tif`: map with metadata.
-* `answer_key.csv`: true coordinates for of speakers.
+* `answer_key.csv`: true coordinates for speakers. See `sources/answer_key_template.csv`for expected structure. Make sure `Question_ID`matches the format.
 
 2. config:
 * in `process_map_data.py`: adjust image dimensions (tif_width vs png_width) if necessary

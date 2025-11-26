@@ -32,10 +32,13 @@ def process_survey_data():
 
     print("loading geotiff metadata...")
     with rasterio.open(TIF_PATH) as src:
-        tif_transform = src.transform 
+        tif_transform = src.transform
         
         # which projection system?
-        src_crs = src.crs 
+        src_crs = src.crs
+
+        # sanity check
+        print(src_crs)
 
     # prepare  math converter
     to_gps = Transformer.from_crs(src_crs, "EPSG:4326", always_xy=True) # always_xy=True --> order is long, lat
@@ -44,7 +47,7 @@ def process_survey_data():
     print("loading CSV data..")
     # to dataframe, use 1st row as header 
     df = pd.read_csv(CSV_PATH, header=0)
-    df_clean = df.drop([0]).copy() # drop 2nd header row. I'm not sure why copy is needed
+    df_clean = df.drop([0]).copy() # drop 2nd header row. copy to avoid panda's SettingWithCopy warning
 
     # step 3: find coordinated columns
     # look for standard qualtrics format for heatmap: _1_x
@@ -82,7 +85,7 @@ def process_survey_data():
                 tif_pixel_x = raw_x * SCALE_X
                 tif_pixel_y = raw_y * SCALE_Y
 
-                # 3. 3onvert Pixels -> map projection units
+                # 3. convert Pixels -> map projection units (m)
                 map_x, map_y = tif_transform * (tif_pixel_x, tif_pixel_y)
 
                 # 4. Convert Map Units -> GPS Lat/Lon
