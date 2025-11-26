@@ -1,0 +1,12 @@
+# ignore system & cache files
+.DS_Store
+__pycache__/
+*.pyc
+
+
+# ignore the  map file
+*.tif
+
+# ignore survey data
+*.csv
+*.xlsx
