@@ -14,3 +14,6 @@ __pycache__/
 # ignore venv
 venv/
 .venv/
+
+# exceptions
+! sources/answer_key_template.csv
